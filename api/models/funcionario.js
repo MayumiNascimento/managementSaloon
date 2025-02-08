@@ -27,7 +27,10 @@ const Funcionario = sequelize.define('Funcionario', {
 
 // Relacionamento: Um funcionário pode ter vários agendamentos
 Funcionario.associate = (models) => {
-  Funcionario.hasMany(models.Agendamento, { foreignKey: 'funcionario_id' });
+  Funcionario.hasMany(models.Agendamento, 
+    { foreignKey: 'funcionario_id', 
+      as: 'agendamentos' 
+    });
 };
 
 module.exports = Funcionario;

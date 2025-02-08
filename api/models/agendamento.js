@@ -18,8 +18,12 @@ const Agendamento = sequelize.define('Agendamento', {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
-  data_hora: {
-    type: DataTypes.DATE,
+  data: {
+    type: DataTypes.DATEONLY, // Armazena apenas a data (YYYY-MM-DD)
+    allowNull: false,
+  },
+  hora: {
+    type: DataTypes.TIME, // Armazena apenas a hora (HH:MM:SS)
     allowNull: false,
   },
   status: {
@@ -35,7 +39,9 @@ const Agendamento = sequelize.define('Agendamento', {
 
 // Relacionamento: Um agendamento pertence a um funcionário
 Agendamento.associate = (models) => {
-  Agendamento.belongsTo(models.Funcionario, { foreignKey: 'funcionario_id' });
+  Agendamento.belongsTo(models.Funcionario, { foreignKey: 'funcionario_id',
+    as: 'funcionario'
+   });
 };
 
 module.exports = Agendamento;
